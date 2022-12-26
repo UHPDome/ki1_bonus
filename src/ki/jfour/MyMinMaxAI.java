@@ -14,11 +14,10 @@ public class MyMinMaxAI extends AI{
             Player[][] current = b.getState();
             int height = current.length;
             int width = current[0].length;
-            Player Max = b.getCurrentPlayer();
-            //setBestMove(new Move(0));
-            //for (int i = 0; i < 3; i++) {
-                minimax(b, 2, -100000, 100000, true, height, width);
-            //}
+            Player MiniMax = b.getCurrentPlayer();
+            for (int i = 0; i < 4; i++) {
+                minimax(b, i, -100000, 100000, true, height, width, MiniMax);
+            }
         }
     }
     @Override
@@ -26,10 +25,10 @@ public class MyMinMaxAI extends AI{
         return "Dominik Petermann";
     }
 
-    public int minimax(Board b, int depth, int alpha, int beta, boolean max, int height, int width){
+    public int minimax(Board b, int depth, int alpha, int beta, boolean max, int height, int width, Player MiniMax){
 
         Player[][] Board = b.getState();
-        Player current = b.getCurrentPlayer();
+        //Player current = b.getCurrentPlayer();
         List<Move> possibleMoves = b.possibleMoves();
 
         int counter = 0;
@@ -48,19 +47,27 @@ public class MyMinMaxAI extends AI{
             for (Move i:possibleMoves) {
                 //System.out.println("Spalte: " + i.column);
                 Board boardIter = b;
+                if(depth == 2) {
+                    System.out.println("*********Spalte: " + i.column + ", Player: " + boardIter.getCurrentPlayer() + " ***********");
+                }
                 boardIter = boardIter.executeMove(i);
-                int eval = minimax(boardIter, depth - 1, alpha, beta, false, height, width);
+                int eval = minimax(boardIter, depth - 1, alpha, beta, false, height, width, MiniMax);
+                System.out.println("Spalte: " + i.column + " Eval: " + eval);
                 if (maxEval < eval) {
                     System.out.println("Best Move MAX Spalte: " + i.column + " Eval: " + eval);
                     maxEval = eval;
-                    setBestMove(i);
+                    if(MiniMax.equals(Player.RED)) {
+                        setBestMove(i);
+                    }
                 }
-                /*if (alpha < eval){
+                if (alpha < eval){
                     alpha = eval;
+                    //System.out.println("Alpha: " + alpha);
                 }
                 if(alpha >= beta){
+                    //System.out.println("PRUUUUUUUUUUUNEEEEEEEEEEEEEEEEEEEEEED");
                     break;
-                }*/
+                }
             }
             return maxEval;
         }
@@ -70,15 +77,23 @@ public class MyMinMaxAI extends AI{
                 //System.out.println("Spalte: " + i.column);
                 Board boardIter = b;
                 boardIter = boardIter.executeMove(i);
-                int eval = minimax(boardIter, depth-1, alpha, beta, true, height, width);
+                int eval = minimax(boardIter, depth-1, alpha, beta, true, height, width, MiniMax);
+                System.out.println("Spalte: " + i.column + " Eval: " + eval);
                 if(minEval > eval) {
                     System.out.println("Best Move MIN Spalte: " + i.column + " Eval: " + eval);
                     minEval = eval;
-                    setBestMove(i);
+                    if(MiniMax.equals(Player.BLUE)) {
+                        setBestMove(i);
+                    }
                 }
-                /*if (beta > eval){
+                if (beta > eval){
                     beta = eval;
-                }*/
+                    //System.out.println("Beta: " + beta);
+                }
+                if(alpha >= beta){
+                    //System.out.println("PRUUUUUUUUUUUNEEEEEEEEEEEEEEEEEEEEEED");
+                    break;
+                }
             }
             return minEval;
         }
@@ -89,6 +104,7 @@ public class MyMinMaxAI extends AI{
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 int count_X = 0;
+                //Vertikale
                 while (j < width && Board[i][j].equals(evalPlayer)){
                     //Unten
                     int count_Y = 1;
@@ -100,28 +116,26 @@ public class MyMinMaxAI extends AI{
                         if(count_Y == 3){heuristicEval = heuristicEval+4;}
                         if(count_Y == 4){heuristicEval = heuristicEval+1000;}
                     }
-                    /*
-                    //Diagonale Oben
-                    count_Y = 1;
-                    while ((i+count_Y)<height && Board[i+count_Y][j].equals(evalPlayer)){
-                        count_Y++;
-                    }
-                    if(count_Y > 1 ){
-                        heuristicEval++;
-                        if(count_Y == 3){heuristicEval = heuristicEval+4;}
-                        if(count_Y == 4){heuristicEval = heuristicEval+1000;}
-                    }
                     //Diagonale Unten
-                    count_Y = 1;
-                    while ((i+count_Y)<height && Board[i+count_Y][j].equals(evalPlayer)){
-                        count_Y++;
+                    int count_Diag_Unten = 1;
+                    while ((i+count_Diag_Unten)<height && (j+count_Diag_Unten)<width && Board[i+count_Diag_Unten][j+count_Diag_Unten].equals(evalPlayer)){
+                        count_Diag_Unten++;
                     }
-                    if(count_Y > 1){
+                    if(count_Diag_Unten > 1 ){
                         heuristicEval++;
-                        if(count_Y == 3){heuristicEval = heuristicEval+4;}
-                        if(count_Y == 4){heuristicEval = heuristicEval+1000;}
+                        if(count_Diag_Unten == 3){heuristicEval = heuristicEval+4;}
+                        if(count_Diag_Unten == 4){heuristicEval = heuristicEval+1000;}
                     }
-                    */
+                    //Diagonale Oben
+                    int count_Diag_Oben = 1;
+                    while ((i-count_Diag_Oben)>-1 && (j+count_Diag_Oben)<width && Board[i-count_Diag_Oben][j+count_Diag_Oben].equals(evalPlayer)){
+                        count_Diag_Oben++;
+                    }
+                    if(count_Diag_Oben > 1 ){
+                        heuristicEval++;
+                        if(count_Diag_Oben == 3){heuristicEval = heuristicEval+4;}
+                        if(count_Diag_Oben == 4){heuristicEval = heuristicEval+1000;}
+                    }
                     count_X++;
                     j++;
                 }
@@ -135,24 +149,9 @@ public class MyMinMaxAI extends AI{
         return heuristicEval;
     }
 
-    public int check(Player[][] Board, Player evalPlayer, int height, int width, int i, int j){
-        int heuristicEval = 0;
-        int count_Y = 1;
-        int count_X = 0;
-        while ((i+count_Y)<height && Board[i+count_Y][j].equals(evalPlayer)){
-            count_Y++;
-        }
-        if(count_Y > 1 /*&& (Board[count_Y][j].equals(Player.NONE)||Board[i-1][j].equals(Player.NONE))*/){
-            heuristicEval++;
-            if(count_Y == 3){heuristicEval = heuristicEval+4;}
-            if(count_Y == 4){heuristicEval = heuristicEval+1000;}
-        }
-        return heuristicEval;
-    }
-
     public static void main(String[] args) throws IOException {
         MyMinMaxAI ai = new MyMinMaxAI();
-        Board b = new Board(5, 10);
+        Board b = new Board(5, 5);
 
         for (int i = 0; i < 10; i++) {
             ai.start(b);
@@ -169,6 +168,3 @@ public class MyMinMaxAI extends AI{
         }
     }
 }
-
-
-/*&& (Board[count_Y][j].equals(Player.NONE)||Board[i-1][j].equals(Player.NONE))*/
