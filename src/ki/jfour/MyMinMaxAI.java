@@ -15,7 +15,7 @@ public class MyMinMaxAI extends AI{
             int height = current.length;
             int width = current[0].length;
             Player MiniMax = b.getCurrentPlayer();
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < 100; i++) {
                 minimax(b, i, -100000, 100000, true, height, width, MiniMax);
             }
         }
