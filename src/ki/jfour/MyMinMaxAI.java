@@ -10,161 +10,223 @@ import static java.lang.Integer.parseInt;
 public class MyMinMaxAI extends AI{
     @Override
     public void start(Board b) {
-        if(b.getWinner().equals(Player.NONE)){
-            Player[][] current = b.getState();
-            int height = current.length;
-            int width = current[0].length;
-            Player MiniMax = b.getCurrentPlayer();
-            for (int i = 0; i < 5; i++) {
-                minimax(b, i, -100000, 100000, true, height, width, MiniMax);
+
+        Player[][] current = b.getState();
+        Player currentPlayer = b.getCurrentPlayer();
+        int height = current.length;
+        int width = current[0].length;
+
+        boolean MinMax = Player(current, height, width);
+
+        for (int i = 0; i < 100; i++) {
+            Move best = new Move(minimax(b, i, -100000, 100000, MinMax, height, width, MinMax, currentPlayer, i));
+            if(b.possibleMoves().contains(best)) {
+                setBestMove(best);
+            }else {
+                setBestMove(b.possibleMoves().get(0));
             }
         }
+
     }
     @Override
     public String getDescription() {
         return "Dominik Petermann";
     }
 
-    public int minimax(Board b, int depth, int alpha, int beta, boolean max, int height, int width, Player MiniMax){
-
+    public int minimax(Board b, int depth, int alpha, int beta, boolean max, int height, int width, boolean playingAs, Player currentPLayer, int startDepth){
         Player[][] Board = b.getState();
-        //Player current = b.getCurrentPlayer();
         List<Move> possibleMoves = b.possibleMoves();
-
-        int counter = 0;
-        while(Board[0][counter]!= Player.NONE /* && !possibleMoves.isEmpty()*/){
-            counter++;
-            setBestMove(new Move(counter));
-        }
+        int bestCol = 0;
 
         if(depth == 0){
-            int heuristicEval = heuristicEval(Board, Player.RED, width, height) - heuristicEval(Board, Player.BLUE, width, height);
-            //System.out.println(heuristicEval);
+            int heuristicEval = 0;
+            if((playingAs && currentPLayer.equals(Player.RED)) || (!playingAs && currentPLayer.equals(Player.BLUE))) {
+                heuristicEval = heuristicEval(Board, Player.RED, width, height, playingAs, currentPLayer) - heuristicEval(Board, Player.BLUE, width, height, playingAs, currentPLayer);
+            }else{
+                heuristicEval = heuristicEval(Board, Player.BLUE, width, height, playingAs, currentPLayer) - heuristicEval(Board, Player.RED, width, height, playingAs, currentPLayer);
+            }
             return heuristicEval;
         }
         if (max){
             int maxEval = -1000000;
             for (Move i:possibleMoves) {
-                //System.out.println("Spalte: " + i.column);
                 Board boardIter = b;
-                if(depth == 2) {
-                    System.out.println("*********Spalte: " + i.column + ", Player: " + boardIter.getCurrentPlayer() + " ***********");
-                }
                 boardIter = boardIter.executeMove(i);
-                int eval = minimax(boardIter, depth - 1, alpha, beta, false, height, width, MiniMax);
-                System.out.println("Spalte: " + i.column + " Eval: " + eval);
-                if (maxEval < eval) {
-                    System.out.println("Best Move MAX Spalte: " + i.column + " Eval: " + eval);
-                    maxEval = eval;
-                    if(MiniMax.equals(Player.RED)) {
-                        setBestMove(i);
-                    }
+                Player Winner = boardIter.getWinner();
+                int eval = 0;
+                if(Winner.equals(Player.RED)){
+                    eval = 100000;
+                }else if(Winner.equals(Player.BLUE)){
+                    eval = -100000;
                 }
+                else {
+                    eval = minimax(boardIter, depth - 1, alpha, beta, false, height, width, playingAs, currentPLayer, startDepth);
+                }
+                if (maxEval < eval) {
+                    maxEval = eval;
+                    bestCol = i.column;
+                }
+
                 if (alpha < eval){
                     alpha = eval;
-                    //System.out.println("Alpha: " + alpha);
                 }
                 if(alpha >= beta){
-                    //System.out.println("PRUUUUUUUUUUUNEEEEEEEEEEEEEEEEEEEEEED");
                     break;
                 }
+            }
+            if(depth == startDepth){
+                return bestCol;
             }
             return maxEval;
         }
         else{
             int minEval = 1000000;
             for (Move i:possibleMoves) {
-                //System.out.println("Spalte: " + i.column);
                 Board boardIter = b;
                 boardIter = boardIter.executeMove(i);
-                int eval = minimax(boardIter, depth-1, alpha, beta, true, height, width, MiniMax);
-                System.out.println("Spalte: " + i.column + " Eval: " + eval);
-                if(minEval > eval) {
-                    System.out.println("Best Move MIN Spalte: " + i.column + " Eval: " + eval);
-                    minEval = eval;
-                    if(MiniMax.equals(Player.BLUE)) {
-                        setBestMove(i);
-                    }
+
+                Player Winner = boardIter.getWinner();
+                int eval = 0;
+                if(Winner.equals(Player.RED)){
+                    eval = 100000;
+                }else if(Winner.equals(Player.BLUE)){
+                    eval = -100000;
                 }
+                else {
+                    eval = minimax(boardIter, depth - 1, alpha, beta, true, height, width, playingAs, currentPLayer, startDepth);
+                }
+                if(minEval > eval) {
+                    minEval = eval;
+                    bestCol = i.column;
+                }
+
                 if (beta > eval){
                     beta = eval;
-                    //System.out.println("Beta: " + beta);
                 }
                 if(alpha >= beta){
-                    //System.out.println("PRUUUUUUUUUUUNEEEEEEEEEEEEEEEEEEEEEED");
                     break;
                 }
+            }
+            if(depth == startDepth){
+                return bestCol;
             }
             return minEval;
         }
     }
     
-    public int heuristicEval(Player[][] Board, Player evalPlayer, int width, int height){
+    public int heuristicEval(Player[][] Board, Player evalPlayer, int width, int height, boolean playingAs, Player currentPlayer){
         int heuristicEval = 0;
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 int count_X = 0;
                 //Vertikale
                 while (j < width && Board[i][j].equals(evalPlayer)){
-                    //Unten
+                    //Horizontal
                     int count_Y = 1;
-                    while ((i+count_Y)<height && Board[i+count_Y][j].equals(evalPlayer)){
+                    while ((i + count_Y) < height && Board[i + count_Y][j].equals(evalPlayer)) {
                         count_Y++;
                     }
-                    if(count_Y > 1 ){
-                        heuristicEval++;
-                        if(count_Y == 3){heuristicEval = heuristicEval+4;}
-                        if(count_Y == 4){heuristicEval = heuristicEval+1000;}
+                    if (count_Y > 1) {
+                        if(i > 0 && Board[i-1][j].equals(Player.NONE)){
+                            heuristicEval++;
+                            if (count_Y == 3) {
+                                heuristicEval = heuristicEval + 9;
+                            }
+                        }
                     }
                     //Diagonale Unten
                     int count_Diag_Unten = 1;
-                    while ((i+count_Diag_Unten)<height && (j+count_Diag_Unten)<width && Board[i+count_Diag_Unten][j+count_Diag_Unten].equals(evalPlayer)){
+                    while ((i + count_Diag_Unten) < height && (j + count_Diag_Unten) < width && Board[i + count_Diag_Unten][j + count_Diag_Unten].equals(evalPlayer)) {
                         count_Diag_Unten++;
                     }
-                    if(count_Diag_Unten > 1 ){
-                        heuristicEval++;
-                        if(count_Diag_Unten == 3){heuristicEval = heuristicEval+4;}
-                        if(count_Diag_Unten == 4){heuristicEval = heuristicEval+1000;}
+                    if (count_Diag_Unten > 1) {
+                        if((i > 0 && j > 0 && Board[i - 1][j - 1].equals(Player.NONE)) || (i + count_Diag_Unten < height && j + count_Diag_Unten < width && Board[i + count_Diag_Unten][j + count_Diag_Unten].equals(Player.NONE))) {
+                            heuristicEval++;
+                            if (count_Diag_Unten == 3) {
+                                heuristicEval = heuristicEval + 9;
+                            }
+                        }
                     }
+                        //}
                     //Diagonale Oben
                     int count_Diag_Oben = 1;
-                    while ((i-count_Diag_Oben)>-1 && (j+count_Diag_Oben)<width && Board[i-count_Diag_Oben][j+count_Diag_Oben].equals(evalPlayer)){
+                    while ((i - count_Diag_Oben) > -1 && (j + count_Diag_Oben) < width && Board[i - count_Diag_Oben][j + count_Diag_Oben].equals(evalPlayer)) {
                         count_Diag_Oben++;
                     }
-                    if(count_Diag_Oben > 1 ){
-                        heuristicEval++;
-                        if(count_Diag_Oben == 3){heuristicEval = heuristicEval+4;}
-                        if(count_Diag_Oben == 4){heuristicEval = heuristicEval+1000;}
+                    if (count_Diag_Oben > 1) {
+                        if((i < height - 1 && j > 0 && Board[i + 1][j - 1].equals(Player.NONE)) || (i - count_Diag_Oben >= 0 && j + count_Diag_Oben < width && Board[i - count_Diag_Oben][j + count_Diag_Oben].equals(Player.NONE))) {
+                            heuristicEval++;
+                            if (count_Diag_Oben == 3) {
+                                heuristicEval = heuristicEval + 9;
+                            }
+                        }
                     }
                     count_X++;
                     j++;
                 }
-                if(count_X > 1 ){//&& Board[i][j].equals(Player.NONE)){
-                    heuristicEval++;
-                    if(count_X == 3){heuristicEval = heuristicEval+4;}
-                    if(count_X == 4){heuristicEval = heuristicEval+1000;}
+                if(count_X > 1 ){
+                    if((j - count_X > 0 && Board[i][j - count_X - 1].equals(Player.NONE)) || (j + 1 < width && Board[i][j + 1].equals(Player.NONE))) {
+                        heuristicEval++;
+                        if (count_X == 3) {
+                            heuristicEval = heuristicEval + 9;
+                        }
+                    }
                 }
             }
         }
         return heuristicEval;
     }
 
+    public boolean[][] fillBool(int height, int width){
+        boolean[][] fillBool = new boolean[height][width];
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                fillBool[i][j] = false;
+            }
+        }
+        return fillBool;
+    }
+
+    public boolean Player(Player[][] current, int height, int width){
+        int countRed = 0;
+        int countBlue = 0;
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                if(current[i][j].equals(Player.RED)){
+                    countRed++;
+                } else if(current[i][j].equals(Player.BLUE)){
+                    countBlue++;
+                }
+            }
+        }
+        return countRed == countBlue;
+    }
+
+
     public static void main(String[] args) throws IOException {
         MyMinMaxAI ai = new MyMinMaxAI();
-        Board b = new Board(5, 5);
+        Board b = new Board(10, 10);
 
-        for (int i = 0; i < 10; i++) {
-            ai.start(b);
-            b = b.executeMove(ai.getBestMove().get());
+        for (int i = 0; i < 100; i++) {
+
+
             // /*
             System.out.println(b.toString());
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             System.out.print("Enter String");
             String exec = br.readLine();
             int execute = parseInt(exec);
-            b = b.executeMove(new Move(execute));
+            b = b.executeMove(new Move(execute - 1));
             // */ b = b.executeMove(new Move(0));
+
+            ai.start(b);
+            b = b.executeMove(ai.getBestMove().get());
 
         }
     }
 }
+//  if (count_Diag_Unten == 4 && !Board[i][j].equals(currentPlayer)) {
+//    heuristicEval = heuristicEval + 1000;
+//} else if (count_Diag_Unten == 4) {
+//  heuristicEval = heuristicEval + 1000;
+//}

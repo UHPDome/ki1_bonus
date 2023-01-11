@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4f499b70-7581-4536-9786-2af8239117bd" name="Changes" comment="TEST12">
+    <list default="true" id="4f499b70-7581-4536-9786-2af8239117bd" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ki/jfour/MyMCTSAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ki/jfour/MyMCTSAI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ki/jfour/MyMinMaxAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ki/jfour/MyMinMaxAI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -25,15 +27,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/domin/Desktop",
-    "settings.editor.selected.configurable": "vcs.Subversion"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/domin/Desktop&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;
   }
-}]]></component>
-  <component name="RunManager">
+}</component>
+  <component name="RunManager" selected="Application.MyMCTSAI">
+    <configuration name="MyMCTSAI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ki.jfour.MyMCTSAI" />
+      <module name="ki1_bonus" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ki.jfour.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MyMinMaxAI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ki.jfour.MyMinMaxAI" />
       <module name="ki1_bonus" />
@@ -49,6 +67,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.MyMCTSAI" />
         <item itemvalue="Application.MyMinMaxAI" />
       </list>
     </recent_temporary>
@@ -57,24 +76,6 @@
   <component name="SvnConfiguration" cleanupOnStartRun="true">
     <configuration>C:\Users\domin\AppData\Roaming\Subversion</configuration>
     <supportedVersion>125</supportedVersion>
-  </component>
-  <component name="SvnFileUrlMappingImpl">
-    <option name="myMappingRoots">
-      <list>
-        <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="C:\Users\domin\javaProject\ki1_bonus" />
-          <option name="myCopyRoot" value="C:\Users\domin\javaProject\ki1_bonus" />
-        </SvnCopyRootSimple>
-      </list>
-    </option>
-    <option name="myMoreRealMappingRoots">
-      <list>
-        <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="C:\Users\domin\javaProject\ki1_bonus" />
-          <option name="myCopyRoot" value="C:\Users\domin\javaProject\ki1_bonus" />
-        </SvnCopyRootSimple>
-      </list>
-    </option>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -98,17 +99,307 @@
       <option name="project" value="LOCAL" />
       <updated>1672760499789</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="TEST12">
+      <created>1672761189123</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1672761189123</updated>
+    </task>
+    <task id="LOCAL-00004" summary="First real Try">
+      <created>1672761405032</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1672761405032</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Try 2">
+      <created>1672766282065</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1672766282065</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Try 3">
+      <created>1672766394613</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1672766394613</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Try 4">
+      <created>1672766601040</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1672766601040</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Try 5">
+      <created>1672766847264</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1672766847264</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Try 5">
+      <created>1672772732860</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1672772732860</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Try 5">
+      <created>1672772806983</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1672772806983</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Try 5">
+      <created>1672773007896</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1672773007896</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Try 5">
+      <created>1672773358440</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1672773358440</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Try 5">
+      <created>1672773410592</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1672773410592</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Try 5">
+      <created>1672773500626</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1672773500626</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Try 5">
+      <created>1672774385888</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1672774385888</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Try 5">
+      <created>1672774457872</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1672774457872</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Try 5">
+      <created>1672774809037</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1672774809037</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Try 5">
+      <created>1672774916161</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1672774916161</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Try 5">
+      <created>1672774998789</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1672774998789</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Try 5">
+      <created>1672775049615</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1672775049615</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Try 5">
+      <created>1672840693406</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1672840693407</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Try 5">
+      <created>1672840784036</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1672840784036</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Try 5">
+      <created>1672840840851</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1672840840851</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Try 5">
+      <created>1672842754693</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1672842754693</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Try 5">
+      <created>1672843687732</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1672843687732</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Try 5">
+      <created>1672843766409</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1672843766409</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Try 5">
+      <created>1672845131565</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1672845131565</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Try 5">
+      <created>1672845370619</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1672845370619</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Try 5">
+      <created>1672845755881</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1672845755881</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Try 5">
+      <created>1672846644192</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1672846644192</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Try 5">
+      <created>1672847212824</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1672847212824</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Try 5">
+      <created>1672847265329</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1672847265329</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Try 5">
+      <created>1672857903461</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1672857903461</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Try 5">
+      <created>1672858583874</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1672858583874</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Try 5">
+      <created>1672859440910</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1672859440910</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Try 5">
+      <created>1672859463556</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1672859463556</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Try 5">
+      <created>1672859750988</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1672859750988</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Try 5">
+      <created>1672860081494</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1672860081494</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Try 5">
+      <created>1673194876841</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1673194876841</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Try 5">
+      <created>1673194970557</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1673194970557</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="TEST12" />
-    <option name="LAST_COMMIT_MESSAGE" value="TEST12" />
+    <MESSAGE value="First real Try" />
+    <MESSAGE value="Try 2" />
+    <MESSAGE value="Try 3" />
+    <MESSAGE value="Try 4" />
+    <MESSAGE value="Try 5" />
+    <option name="LAST_COMMIT_MESSAGE" value="Try 5" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ki/jfour/MyMCTSAI.java</url>
+          <line>20</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="ki.jfour.Board" memberName="board" />
+        <PinnedItemInfo parentTag="ki.jfour.MyMCTSAI$MCTS" memberName="state" />
+        <PinnedItemInfo parentTag="ki.jfour.MyMCTSAI$MCTS" memberName="root" />
+      </pinned-members>
+    </pin-to-top-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="Board[0]" language="JAVA" />
+        <watch expression="b.board[9]" />
+        <watch expression="Board[9]" />
+        <watch expression="Update.children.get(3)" />
       </configuration>
     </watches-manager>
   </component>

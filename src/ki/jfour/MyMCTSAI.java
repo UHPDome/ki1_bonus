@@ -4,18 +4,20 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
 import static java.lang.Integer.parseInt;
+import static java.lang.Math.sqrt;
 
 public class MyMCTSAI extends AI{
 
     @Override
     public void start(Board b) {
         if(b.getWinner().equals(Player.NONE)){
-            MCTS root = new MCTS(b, new MCTS(), Collections.emptyList(), 0, 0, new Move(0));
-            for (int i = 0; i < 2; i++) {
+            MCTS root = new MCTS(true, b, new MCTS(), new LinkedList<MCTS>(), 0, 0, new Move(0));
+            for (int i = 0; i < 1000; i++) {
                 Expansion(Selection(root));
                 UpdateBestMove(root);
             }
@@ -23,6 +25,7 @@ public class MyMCTSAI extends AI{
     }
 
     public class MCTS {
+        private boolean root;
         private Board state;
         private MCTS parent;
         private List<MCTS> children;
@@ -31,13 +34,16 @@ public class MyMCTSAI extends AI{
 
         private Move current;
 
-        public MCTS(Board state, MCTS parent, List<MCTS> children, int win, int played, Move current) {
-            this.state = state;
-            this.parent = parent;
+        public MCTS(Boolean root, Board state, MCTS parent, List<MCTS> children, int win, int played, Move current) {
+            this.root = root;
             this.children = children;
-            this.win = win;
+            this.state = state;
             this.played = played;
-            this.current = current;
+            if(!root) {
+                this.parent = parent;
+                this.win = win;
+                this.current = current;
+            }
         }
 
         public MCTS() {
@@ -48,9 +54,10 @@ public class MyMCTSAI extends AI{
         while(!Select.children.equals(Collections.emptyList())){
             double eval = 0.0;
 
-            for (MCTS child:Select.children
-                 ) {
-                int comp = child.win/child.played;
+            for (MCTS child:Select.children) {
+                double comp = 0.0;
+                if(Select.root){ comp = Double.valueOf(child.win)/Double.valueOf(child.played);}
+                else{comp = Double.valueOf(child.win)/Double.valueOf(child.played) + sqrt(2) * sqrt(Math.log10(Select.played)/child.played);}
                 if(eval < comp){
                     eval = comp;
                     Select = child;
@@ -66,9 +73,9 @@ public class MyMCTSAI extends AI{
         for (Move m:Expand.state.possibleMoves()
              ) {
             Board nextBoard = Expand.state;
-            nextBoard.executeMove(m);
+            nextBoard = nextBoard.executeMove(m);
             int simulate = Simulate(nextBoard);
-            Expand.children.add(new MCTS(nextBoard, Expand, Collections.emptyList(), simulate, 1, m));
+            Expand.children.add(new MCTS(false, nextBoard, Expand,new LinkedList<MCTS>(), simulate, 1, m));
             if(simulate == 1){
                 wins++;
             }
@@ -87,7 +94,7 @@ public class MyMCTSAI extends AI{
             List<Move> Moves = simulate.possibleMoves();
             if(Moves.size() == 0){return win;}
             int move = ran.nextInt(Moves.size());
-            simulate.executeMove(Moves.get(move));
+            simulate = simulate.executeMove(Moves.get(move));
         }
 
         if(simulate.getWinner().equals(Player.RED)){
@@ -97,9 +104,10 @@ public class MyMCTSAI extends AI{
     }
 
     public void Update(MCTS Update, int win, int played){
-        while(!Update.parent.equals(new MCTS())){
+        while(!Update.root){
             Update.win = Update.win + win;
             Update.played = Update.played + played;
+            Update = Update.parent;
         }
     }
     public void UpdateBestMove(MCTS bestMove){
@@ -125,7 +133,7 @@ public class MyMCTSAI extends AI{
 
     public static void main(String[] args) throws IOException {
         MyMCTSAI ai = new MyMCTSAI();
-        Board b = new Board(5, 5);
+        Board b = new Board(10, 10);
 
         for (int i = 0; i < 10; i++) {
             ai.start(b);
@@ -138,7 +146,7 @@ public class MyMCTSAI extends AI{
             int execute = parseInt(exec);
             b = b.executeMove(new Move(execute));
             // */ b = b.executeMove(new Move(0));
-
+            //
         }
     }
 }
